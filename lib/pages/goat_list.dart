@@ -206,7 +206,42 @@
 
 import 'package:flutter/material.dart';
 
-class GoatList extends StatelessWidget {
+class GoatList extends StatefulWidget {
+  @override
+  State<GoatList> createState() => _GoatListState();
+}
+
+class _GoatListState extends State<GoatList> {
+  String name = '';
+  List<Map<String, dynamic>> goatData = [
+    {
+      'ID': "A1000",
+      'DOB': '12/13/23',
+      "sex": 'female',
+      "colour": 'white',
+    },
+    {
+      'ID': "A11000",
+      'DOB': '12/14/23',
+      "sex": 'male',
+      "colour": 'black and white',
+    },
+    {
+      'ID': "A13000",
+      'DOB': '09/11/23',
+      "sex": 'female',
+      "colour": 'white',
+    },
+    {
+      'ID': "A12000",
+      'DOB': '08/10/23',
+      "sex": 'male',
+      "colour": 'black',
+    }
+  ];
+
+  List<Map<String, dynamic>> filteredGoatData = [];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -214,53 +249,65 @@ class GoatList extends StatelessWidget {
         appBar: AppBar(
           title: Text('All Goats'),
         ),
-        body: BeautifulList(),
+        body: Container(
+          padding: EdgeInsets.all(10),
+          child: ListView(
+            children: [
+              TextFormField(
+                onChanged: (val) {
+                  setState(() {
+                    name = val;
+                    _filterGoats();
+                  });
+                },
+                cursorColor: Colors.black,
+                decoration: InputDecoration(
+                  suffixIcon: Icon(
+                    Icons.search,
+                    color: Colors.grey,
+                  ),
+                  hintText: 'PhoneNumber...',
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color:
+                            Colors.black), // You can customize the color here
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                ),
+              ),
+              _goatsList(context)
+            ],
+          ),
+        ),
       ),
     );
   }
-}
 
-class BeautifulList extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    List<Map<String, dynamic>> goatdata = [
-      {
-        'ID': "A1000",
-        'DOB': '12/13/23',
-        "sex": 'female',
-        "colour": 'white',
-      },
-      {
-        'ID': "A11000",
-        'DOB': '12/14/23',
-        "sex": 'male',
-        "colour": 'black and white',
-      },
-      {
-        'ID': "A13000",
-        'DOB': '09/11/23',
-        "sex": 'female',
-        "colour": 'white',
-      },
-      {
-        'ID': "A12000",
-        'DOB': '08/10/23',
-        "sex": 'male',
-        "colour": 'black',
-      }
-    ];
-    return ListView.builder(
-      itemCount: goatdata.length, // Set the number of items in your list
-      itemBuilder: (BuildContext context, index) {
-        dynamic allGoats = goatdata[index];
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: BeautifulCard(
-            title: 'ID: ${allGoats['ID']}',
-            description: 'SEX: ${allGoats['sex']}',
-          ),
-        );
-      },
+  void _filterGoats() {
+    filteredGoatData = goatData
+        .where((goat) =>
+            goat['ID'].toLowerCase().contains(name.toLowerCase()) ||
+            goat['ID'].toLowerCase().contains(name.toLowerCase()))
+        .toList();
+  }
+
+  Widget _goatsList(BuildContext context) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.8,
+      child: ListView.builder(
+        itemCount: filteredGoatData.length,
+        itemBuilder: (BuildContext context, index) {
+          dynamic goat = filteredGoatData[index];
+
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: BeautifulCard(
+              title: 'ID: ${goat['ID']}',
+              description: 'SEX: ${goat['sex']}',
+            ),
+          );
+        },
+      ),
     );
   }
 }
@@ -307,7 +354,7 @@ class BeautifulCard extends StatelessWidget {
                   ],
                 ),
                 Icon(
-                  Icons.delete,
+                  Icons.more_vert,
                   size: 35,
                 )
               ],

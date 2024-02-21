@@ -4,6 +4,8 @@ import 'package:mbudzi/config/configuring.dart';
 import 'package:mbudzi/pages/add.livestock.dart';
 import 'package:mbudzi/pages/add_goat_data.dart';
 import 'package:mbudzi/pages/goat_list.dart';
+import 'package:mbudzi/pages/goat_reviws.dart';
+import 'package:mbudzi/pages/goats_report.dart';
 import 'package:mbudzi/widgets/inputs.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -37,6 +39,7 @@ class MyHomePage extends StatelessWidget {
                     'View summary information about your goats.',
                     Icons.dashboard,
                     () {
+                      Get.to(GoatOverviewScreen());
                       // Navigate to the Goat Overview screen
                     },
                   ),
@@ -66,6 +69,7 @@ class MyHomePage extends StatelessWidget {
                     'Generate reports and analytics.',
                     Icons.analytics,
                     () {
+                      Get.to(GoatReportPage());
                       // Navigate to the Reports screen
                     },
                   ),

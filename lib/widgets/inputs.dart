@@ -21,7 +21,7 @@ class AdminDrawer extends GetView<AuthController> {
               backgroundImage: AssetImage('assets/back1.jpg')),
           accountEmail: Text('Logged in User'),
           accountName: const Text(
-            'Track My Livestock',
+            'Manage Goats',
             style: TextStyle(fontSize: 24.0),
           ),
           decoration: const BoxDecoration(
@@ -32,7 +32,7 @@ class AdminDrawer extends GetView<AuthController> {
           onTap: () => Get.to(const AddLiveStock()),
           leading: const Icon(Icons.add),
           title: const Text(
-            'Add livestock',
+            'Add Goat',
             style: TextStyle(fontSize: 15.0),
           ),
           // onTap: () => Get.to(const AllUserDetails()),
@@ -40,7 +40,7 @@ class AdminDrawer extends GetView<AuthController> {
         ListTile(
           leading: const Icon(Icons.list),
           title: const Text(
-            'Livestock List',
+            'Goat List',
             style: TextStyle(fontSize: 15.0),
           ),
           onTap: () => Get.to(GoatList()),

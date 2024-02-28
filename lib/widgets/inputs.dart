@@ -29,7 +29,7 @@ class AdminDrawer extends GetView<AuthController> {
           ),
         ),
         ListTile(
-          onTap: () => Get.to(const AddLiveStock()),
+          onTap: () => Get.to(AddLiveStock()),
           leading: const Icon(Icons.add),
           title: const Text(
             'Add Goat',

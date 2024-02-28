@@ -58,7 +58,7 @@ class GoatReportPage extends StatelessWidget {
               'Date: $date',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(notification),
           ],
         ),

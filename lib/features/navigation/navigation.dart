@@ -22,7 +22,7 @@ class Navigation extends GetView<NavigationController> {
             kUser.value = UserModel.fromJson(snapshot.data);
             return MyHomePage();
           }
-          return const WelcomeScreen();
+          return MyHomePage();
         }
         return const Scaffold();
       },

@@ -109,7 +109,7 @@ class AuthController extends GetxController {
     // getStorage.erase();
     FirebaseAuth.instance
         .signOut()
-        .then((value) => Get.to(() => const LoginScreen()));
+        .then((value) => Get.to(() => LoginScreen()));
   }
 
   delete() async {
@@ -128,7 +128,7 @@ class AuthController extends GetxController {
             actions: [
               TextButton(
                   child: const Text("OK"),
-                  onPressed: () => Get.offAll(const LoginScreen()))
+                  onPressed: () => Get.offAll(LoginScreen()))
             ]);
         // Get.snackbar('Account', 'Succesfully deleted');
         // getStorage.erase();

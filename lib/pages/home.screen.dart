@@ -39,7 +39,7 @@ class MyHomePage extends StatelessWidget {
                     'View summary information about your goats.',
                     Icons.dashboard,
                     () {
-                      Get.to(GoatOverviewScreen());
+                      Get.to(MyApp());
                       // Navigate to the Goat Overview screen
                     },
                   ),
@@ -59,7 +59,7 @@ class MyHomePage extends StatelessWidget {
                     'Add a new goat to your inventory.',
                     Icons.add,
                     () {
-                      Get.to(const AddLiveStock());
+                      Get.to(AddLiveStock());
                       // Navigate to the Add Goat screen
                     },
                   ),

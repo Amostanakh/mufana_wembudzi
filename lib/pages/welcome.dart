@@ -4,7 +4,6 @@ import 'package:mbudzi/controller/authentication.dart';
 import 'package:mbudzi/pages/loginscreen.dart';
 import 'package:mbudzi/pages/signupscreen.dart';
 
-
 class WelcomeScreen extends GetView<AuthController> {
   const WelcomeScreen({
     super.key,
@@ -41,7 +40,7 @@ class WelcomeScreen extends GetView<AuthController> {
             )),
             GestureDetector(
               onTap: () async {
-                Get.to(const SignUpScreen());
+                Get.to(SignUpScreen());
               },
               child: Container(
                 margin: const EdgeInsets.all(12),
@@ -64,7 +63,7 @@ class WelcomeScreen extends GetView<AuthController> {
             ),
             GestureDetector(
               onTap: () async {
-                Get.to(const LoginScreen());
+                Get.to(LoginScreen());
               },
               child: Container(
                 margin: const EdgeInsets.all(12),

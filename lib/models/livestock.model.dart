@@ -1,36 +1,43 @@
-class LivestockModel {
-  String? phoneNumber;
-  String? uid;
-  String? tagNo;
-  String? dateOfBirth;
-  String? dateOfEntryOnFarm;
-  String? mothersTag;
+class GoatModel {
+  final String tagNumber;
+  final String birthDate;
+  final double weight;
+  final String gender;
+  final int father;
+  final int mother;
+  final int owner;
 
-  LivestockModel(
-      {this.phoneNumber,
-      this.uid,
-      this.tagNo,
-      this.dateOfBirth,
-      this.dateOfEntryOnFarm,
-      this.mothersTag});
+  GoatModel({
+    required this.tagNumber,
+    required this.birthDate,
+    required this.weight,
+    required this.gender,
+    required this.father,
+    required this.mother,
+    required this.owner,
+  });
 
-  LivestockModel.fromJson(Map<String, dynamic> json) {
-    phoneNumber = json['email'];
-    uid = json['uid'];
-    tagNo = json['tagNo'];
-    dateOfBirth = json['dateOfBirth'];
-    dateOfEntryOnFarm = json['dateOfEntryOnFarm'];
-    mothersTag = json['mothersTag'];
+  factory GoatModel.fromJson(Map<String, dynamic> json) {
+    return GoatModel(
+      tagNumber: json['tag_number'],
+      birthDate: json['birth_date'],
+      weight: json['weight'],
+      gender: json['gender'],
+      father: json['father'],
+      mother: json['mother'],
+      owner: json['owner'],
+    );
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['email'] = phoneNumber;
-    data['uid'] = uid;
-    data['tagNo'] = tagNo;
-    data['dateOfBirth'] = dateOfBirth;
-    data['dateOfEntryOnFarm'] = dateOfEntryOnFarm;
-    data['mothersTag'] = mothersTag;
-    return data;
+    return {
+      'tag_number': tagNumber,
+      'birth_date': birthDate,
+      'weight': weight,
+      'gender': gender,
+      'father': father,
+      'mother': mother,
+      'owner': owner,
+    };
   }
 }

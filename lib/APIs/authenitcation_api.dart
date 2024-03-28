@@ -40,13 +40,11 @@ class UserRepository extends GetxController {
       final response = await dio.post(
         '$baseUrl/login/',
         data: {'username': username, 'password': password},
-        options: Options(
-          headers: {'Content-Type': 'application/json'},
-        ),
       );
+
       if (response.statusCode == 200) {
-        authToken.value = response.data['access'] as String;
-        getStorage.write('authToken', authToken.value);
+        // authToken.value = response.data['access'] as String;
+        // getStorage.write('authToken', authToken.value);
         return 'loginSuccess';
       } else {
         return ('Failed to login. Server response:');

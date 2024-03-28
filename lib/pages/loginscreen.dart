@@ -86,7 +86,7 @@ class LoginScreen extends StatelessWidget {
                               ))
                             : const Center(
                                 child: Text(
-                                  'Sign-Up',
+                                  'SignIn',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 15.0, color: Colors.white),

@@ -1,10 +1,12 @@
+import 'package:adoptive_calendar/adoptive_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mbudzi/config/configuring.dart';
 import 'package:mbudzi/controller/authentication.dart';
 import 'package:mbudzi/pages/add.livestock.dart';
-import 'package:mbudzi/pages/delete.account.dart';
+import 'package:mbudzi/pages/learning_tools.dart';
 import 'package:mbudzi/pages/goat_list.dart';
+import 'package:mbudzi/pages/vaccines_page.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
 
 class AdminDrawer extends GetView<AuthController> {
@@ -16,15 +18,15 @@ class AdminDrawer extends GetView<AuthController> {
         child: ListView(
       padding: EdgeInsets.zero,
       children: [
-        UserAccountsDrawerHeader(
-          currentAccountPicture: const CircleAvatar(
-              backgroundImage: AssetImage('assets/back1.jpg')),
+        const UserAccountsDrawerHeader(
+          currentAccountPicture:
+              CircleAvatar(backgroundImage: AssetImage('assets/back1.jpg')),
           accountEmail: Text('Logged in User'),
-          accountName: const Text(
+          accountName: Text(
             'Manage Goats',
             style: TextStyle(fontSize: 24.0),
           ),
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: Colors.black87,
           ),
         ),
@@ -46,9 +48,29 @@ class AdminDrawer extends GetView<AuthController> {
           onTap: () => Get.to(GoatList()),
         ),
         ListTile(
-          // onTap: () => Get.to(const UserGuide()),
-          leading: const Icon(Icons.integration_instructions),
+            leading: const Icon(Icons.medical_information),
+            title: const Text(
+              'Vaccines',
+              style: TextStyle(fontSize: 15.0),
+            ),
+            onTap: () {
+              Get.to(Vaccines());
+            }),
+        ListTile(
+          leading: const Icon(Icons.school),
           title: const Text(
+            'Learning Tools',
+            style: TextStyle(fontSize: 15.0),
+          ),
+          onTap: () {
+            Get.to(const LearningObjectives());
+            print('learnign tools');
+          },
+        ),
+        const ListTile(
+          // onTap: () => Get.to(const UserGuide()),
+          leading: Icon(Icons.integration_instructions),
+          title: Text(
             'Help',
             style: TextStyle(fontSize: 15.0),
           ),
@@ -61,15 +83,6 @@ class AdminDrawer extends GetView<AuthController> {
           leading: const Icon(Icons.logout),
           title: const Text(
             'log-out',
-            style: TextStyle(fontSize: 15.0),
-          ),
-          // onTap: () => Get.to(const AllUserDetails()),
-        ),
-        ListTile(
-          onTap: () => Get.to(const DeleteAccount()),
-          leading: const Icon(Icons.delete_forever),
-          title: const Text(
-            'Delete Account',
             style: TextStyle(fontSize: 15.0),
           ),
           // onTap: () => Get.to(const AllUserDetails()),
@@ -258,12 +271,17 @@ class TextFormFilds extends StatelessWidget {
   }
 }
 
-class DateTextFormFilds extends StatelessWidget {
+class DateTextFormFilds extends StatefulWidget {
   final String hintText;
   final TextEditingController controller;
   const DateTextFormFilds(
       {super.key, required this.hintText, required this.controller});
 
+  @override
+  State<DateTextFormFilds> createState() => _DateTextFormFildsState();
+}
+
+class _DateTextFormFildsState extends State<DateTextFormFilds> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -272,21 +290,48 @@ class DateTextFormFilds extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: TextFormField(
+            enabled: false,
             cursorColor: Colors.black,
-            controller: controller,
+            controller: widget.controller,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             keyboardType: TextInputType.number,
-            inputFormatters: [
-              DateInputFormatter(),
-            ],
             decoration: InputDecoration(
-              border: const OutlineInputBorder(
-                borderSide: BorderSide.none,
-              ),
-              filled: true,
-              fillColor: Colors.grey.withOpacity(0.25),
-              hintText: hintText,
-            ),
+                border: const OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                ),
+                filled: true,
+                fillColor: Colors.grey.withOpacity(0.25),
+                hintText: widget.hintText,
+                suffixIcon: const Icon(Icons.calendar_month)),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class DateContainer extends StatefulWidget {
+  DateContainer({super.key});
+
+  @override
+  State<DateContainer> createState() => _DateContainerState();
+}
+
+class _DateContainerState extends State<DateContainer> {
+  dynamic dateOfBirth = "Date of Birth";
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+              color: Colors.grey.withOpacity(0.25),
+              borderRadius: BorderRadius.circular(3)),
+          height: 50,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [Text(dateOfBirth), Icon(Icons.calendar_month)],
           ),
         ),
       ],

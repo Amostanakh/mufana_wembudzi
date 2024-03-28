@@ -10,10 +10,10 @@ class GoatsApi {
   Dio _dio = Dio();
   final UserRepository authService = Get.put(UserRepository());
   Future<void> fetchGoatData() async {
-    print(authService.authToken);
     try {
-      Response response = await _dio.get('$baseUrl/goats/');
-
+      Response response = await _dio.get(
+        '$baseUrl/goats/',
+      );
       if (response.statusCode == 200) {
         return response.data;
       } else {

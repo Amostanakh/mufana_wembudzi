@@ -27,9 +27,23 @@ class AuthController extends GetxController {
   TextEditingController fathersTag = TextEditingController();
   GetStorage getStorage = GetStorage();
   RxBool isLoading = false.obs;
+  Rx<DateTime> selectedDate = DateTime.now().obs;
   late final FirebaseAuth auth;
 
   Map<String, dynamic> data = {};
+
+  selectDateFunction(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate.value,
+      firstDate: DateTime(2022),
+      lastDate: DateTime(2030),
+    );
+
+    if (picked != null && picked != selectedDate.value) {
+      selectedDate.value = picked;
+    }
+  }
 
   void signup(BuildContext context) {
     //isLoading.value = true;

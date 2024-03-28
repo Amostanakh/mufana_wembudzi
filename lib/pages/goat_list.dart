@@ -33,6 +33,7 @@ class _GoatListState extends State<GoatList> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: greenColor,
           title: const Text('All Goats'),
         ),
         body: Container(
@@ -69,8 +70,9 @@ class _GoatListState extends State<GoatList> {
   }
 
   Widget _goatsList(BuildContext context) {
-    List<dynamic> filteredGoats =
-        goats.where((goat) => goat['id'].toString().contains(name)).toList();
+    List<dynamic> filteredGoats = goats
+        .where((goat) => goat['tag_number'].toString().contains(name))
+        .toList();
     if (goats.isEmpty) {
       return const Padding(
           padding: EdgeInsets.only(top: 50),
@@ -80,37 +82,39 @@ class _GoatListState extends State<GoatList> {
             ),
           ));
     } else {
-      return SizedBox(
-        height: MediaQuery.of(context).size.height * 0.8,
-        child: Column(
-          children: [
-            if (filteredGoats.isNotEmpty)
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: filteredGoats.length,
-                itemBuilder: (BuildContext context, index) {
-                  dynamic goat = filteredGoats[index];
-                  return GestureDetector(
-                    onTap: () {
-                      Get.to(GoatDetailsScreen(
-                        goatId: '${goat['id']}',
-                        owner: '${goat['owner']}',
-                      ));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: BeautifulCard(
-                        title: 'ID: ${goat['id']}',
-                        description: 'SEX: ${goat['owner']}',
-                      ),
+      return Column(
+        children: [
+          if (filteredGoats.isNotEmpty)
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: filteredGoats.length,
+              itemBuilder: (BuildContext context, index) {
+                dynamic goat = filteredGoats[index];
+                return GestureDetector(
+                  onTap: () {
+                    Get.to(GoatDetailsScreen(
+                      weight: '${goat['weight']}',
+                      father: '${goat['father']}',
+                      mother: '${goat['mother']}',
+                      gender: '${goat['gender']}',
+                      birthData: '${goat['birth_date']}',
+                      goatId: '${goat['tag_number']}',
+                      owner: '${goat['owner']}',
+                    ));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: BeautifulCard(
+                      title: 'ID: ${goat['tag_number']}',
+                      description: 'SEX: ${goat['gender']}',
                     ),
-                  );
-                },
-              )
-            else
-              Text('No goats found with ID: $name'),
-          ],
-        ),
+                  ),
+                );
+              },
+            )
+          else
+            Text('No goats found with ID: $name'),
+        ],
       );
     }
   }

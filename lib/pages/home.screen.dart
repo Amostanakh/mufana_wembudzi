@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mbudzi/config/configuring.dart';
 import 'package:mbudzi/pages/add.livestock.dart';
-import 'package:mbudzi/pages/add_goat_data.dart';
 import 'package:mbudzi/pages/goat_list.dart';
 import 'package:mbudzi/pages/goat_reviws.dart';
 import 'package:mbudzi/pages/goats_report.dart';
@@ -26,9 +25,9 @@ class MyHomePage extends StatelessWidget {
         ),
         child: Column(
           children: [
-            const SizedBox(height: 70),
+            const SizedBox(height: 40),
             SlidingCardsWidget(),
-            const SizedBox(height: 30),
+            const SizedBox(height: 10),
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
@@ -39,7 +38,7 @@ class MyHomePage extends StatelessWidget {
                     'View summary information about your goats.',
                     Icons.dashboard,
                     () {
-                      Get.to(MyApp());
+                      Get.to(GoatOverviewScreen());
                       // Navigate to the Goat Overview screen
                     },
                   ),
@@ -123,13 +122,14 @@ class SlidingCardsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200, // Set the height as needed
+      height: 150, // Set the height as needed
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          _buildSlidingCard(context, 'Card 1'),
-          _buildSlidingCard(context, 'Card 2'),
-          _buildSlidingCard(context, 'Card 3'),
+          _buildSlidingCard(
+              context, 'Vaccinationation programs on the 2024-04-12'),
+          _buildSlidingCard(context, 'Two goats Affected '),
+          _buildSlidingCard(context, 'Out Break foot n mouth'),
           // Add more sliding cards as needed
         ],
       ),
@@ -138,6 +138,7 @@ class SlidingCardsWidget extends StatelessWidget {
 
   Widget _buildSlidingCard(BuildContext context, String cardTitle) {
     return Container(
+      padding: EdgeInsets.all(9),
       width: MediaQuery.of(context).size.width * 0.8, // Set the width as needed
       margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       decoration: BoxDecoration(

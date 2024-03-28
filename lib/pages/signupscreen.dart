@@ -91,7 +91,7 @@ class SignUpScreen extends StatelessWidget {
                               ))
                             : const Center(
                                 child: Text(
-                                  'Sign-Up',
+                                  'SignUp',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 15.0, color: Colors.white),

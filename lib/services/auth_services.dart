@@ -38,7 +38,9 @@ class RegisterController extends GetxController {
       username,
       password,
     );
+    // isLoading(false);
 
+    print("****************${loginResult}");
     if (loginResult == 'loginSuccess') {
       Fluttertoast.showToast(
         msg: 'Successfully Registered',
